@@ -20,4 +20,9 @@ spring:          #表示该配置直接为Spring容器负责处理
      hibernate:
         ddl-auto: update
      show-sql: true
-     open-in-view: false
+     open-in-view: true
+  http:
+     encoding:
+        force: true
+        charset: utf-8
+        enabled: true

@@ -81,10 +81,15 @@ public class UserDaoTest {
 		res2.setName("用户删除");
 		res2.setUrl("/user/del");
 		res2.setPermCode("user:del");
+		Resource res3 = new Resource();
+		res3.setName("用户列表");
+		res3.setUrl("/user/list");
+		res3.setPermCode("user:list");
 		
 		List<Resource> resources = new ArrayList<>();
 		resources.add(res1);
 		resources.add(res2);
+		resources.add(res3);
 		role.setResources(resources);
 		log.info("{}",roleRepository.save(role));
 	}

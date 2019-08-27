@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -40,5 +42,6 @@ public class Resource extends BaseModel {
 	
 	/** * 放弃维护关系方*/
 	@ManyToMany(mappedBy="resources")
+	@JSONField(serialize = false)
 	private List<Role> roles;
 }
