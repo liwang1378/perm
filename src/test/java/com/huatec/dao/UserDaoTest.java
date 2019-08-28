@@ -97,7 +97,8 @@ public class UserDaoTest {
 	@Test
 	@Transactional
 	public void testFindRole() {
-		log.info("{}",roleRepository.findById(14).get());
+		Role role = roleRepository.findById(30).get();
+		log.info("{}",role);
 	}
 	
 	@Test

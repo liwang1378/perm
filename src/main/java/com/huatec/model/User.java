@@ -36,8 +36,10 @@ public class User extends BaseModel {
 	private String username;
 	@NotBlank(message="用户昵称必填")
 	private String nickname;
+	//未生效
 	@Length(min=6,max=20,message="密码长度需要在{min}和{max}之间")
 	private String password;
+	@NotBlank(message="盐必填")
 	private String salt;
 	private String pids;
 	private Integer deptId;
