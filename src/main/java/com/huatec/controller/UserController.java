@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.huatec.annotation.SysLog;
 import com.huatec.dto.UserRole;
 import com.huatec.enums.ResultEnum;
 import com.huatec.model.User;
@@ -29,14 +32,16 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="list",produces = "application/json;charset=utf-8" )
+	@SysLog("用户列表")
 	public ResponseVo userList() {
-		return ResponseVoUtil.success(userService.findAll());
-//		String json =JSON.toJSONString(userService.findAll(), SerializerFeature.DisableCircularReferenceDetect);
-//		return ResponseVoUtil.success(JSON.parseObject(json));
+//		return ResponseVoUtil.success(userService.findAll());
+		String json =JSON.toJSONString(userService.findAll(), SerializerFeature.DisableCircularReferenceDetect);
+		return ResponseVoUtil.success(JSON.parseArray(json));
 	}
 	
 	//新增或更新用户
 	@RequestMapping("add")
+	@SysLog("用户新增或更新")
 	public ResponseVo userAdd(@Valid @RequestBody User user,BindingResult result) {
 		log.info("{}",user);
 		if(result.hasErrors()) {
@@ -47,11 +52,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/alterStatus")
+	@SysLog("用户状态变更")
 	public ResponseVo alterStatus(@RequestBody User user) {
 		return ResponseVoUtil.success(userService.save(user));
 	}
 	
 	@GetMapping("/get/{id}")
+	@SysLog("获取指定用户")
 	public ResponseVo get(@PathVariable("id")Integer id) {
 		User user = userService.findOne(id);
 		return ResponseVoUtil.success(user);
@@ -59,12 +66,14 @@ public class UserController {
 	
 	//删除
 	@RequestMapping("/delete/{id}")
+	@SysLog("用户删除")
 	public ResponseVo delete(@PathVariable("id")Integer id) {
 		userService.delete(id);
 		return ResponseVoUtil.success();
 	}
 	
 	@PostMapping("/bindRoles")
+	@SysLog("用户绑定角色")
 	public ResponseVo bindRoles(@RequestBody UserRole userRole) {
 		return ResponseVoUtil.success(userService.bindRoles(userRole));
 	}

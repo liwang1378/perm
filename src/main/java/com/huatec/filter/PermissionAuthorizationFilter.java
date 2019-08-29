@@ -2,6 +2,7 @@ package com.huatec.filter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.subject.Subject;
@@ -19,11 +20,11 @@ public class PermissionAuthorizationFilter extends AccessControlFilter  {
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
 			throws Exception {
 		Subject subject = getSubject(request, response);
-		log.info("{}是否允许-权限授权过滤器执行入口",mappedValue);
+		log.info("权限字符串集合{} - 授权过滤器判断主体是否有此权限",mappedValue);
 		if(null != mappedValue) {
 			String[] value = (String[]) mappedValue;
-			log.info("{}",value);
 			for(String perm : value) {
+				log.info("权限字符串{}",perm);
 				if(perm==null || "".equals(perm)) {
 					continue;
 				}
@@ -37,7 +38,7 @@ public class PermissionAuthorizationFilter extends AccessControlFilter  {
 
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-		log.info("访问拒绝方法入口");
+		log.info("访问{}拒绝",((HttpServletRequest)request).getRequestURI());
 		Subject subject = getSubject(request, response);
 		saveRequest(request);
 		HttpServletResponse res = (HttpServletResponse) response;

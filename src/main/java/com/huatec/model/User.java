@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class User extends BaseModel {
 	private Integer deptId;
 	private Integer status;
 	
-	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
+	@ManyToMany(fetch=FetchType.EAGER,cascade= {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
 	@JoinTable(name="T04_SYS_USER_ROLE",
 	joinColumns=@JoinColumn(name="userId"),
 	inverseJoinColumns=@JoinColumn(name="roleId"))

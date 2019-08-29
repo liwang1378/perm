@@ -22,7 +22,7 @@ import com.huatec.service.ShiroService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
 	@Bean

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -44,4 +45,7 @@ public class Resource extends BaseModel {
 	@ManyToMany(mappedBy="resources")
 	@JSONField(serialize = false)
 	private List<Role> roles;
+	
+	@Transient
+	private List<Resource> children;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class Role extends BaseModel {
 	private List<User> users;
 	
 	//关系维护方, role => resource 
-	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
+	@ManyToMany(fetch=FetchType.EAGER,cascade= {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
 	@JoinTable(name="T05_SYS_ROLE_RESOURCE",
 	joinColumns=@JoinColumn(name="roleId"),
 	inverseJoinColumns=@JoinColumn(name="resId"))

@@ -51,7 +51,7 @@ public class QSysLog extends EntityPathBase<SysLog> {
 
     public final StringPath uri = createString("uri");
 
-    public final StringPath userId = createString("userId");
+    public final NumberPath<Integer> userId = createNumber("userId", Integer.class);
 
     public final StringPath username = createString("username");
 

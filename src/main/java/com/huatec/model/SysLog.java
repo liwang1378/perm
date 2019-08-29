@@ -24,7 +24,7 @@ public class SysLog extends BaseModel {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String username;
-	private String userId;
+	private Integer userId;
 	private String ip;
 	private Integer ajax;
 	private String uri;
