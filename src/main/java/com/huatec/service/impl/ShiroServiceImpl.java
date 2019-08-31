@@ -25,15 +25,23 @@ public class ShiroServiceImpl implements ShiroService {
 	public Map<String, String> getFilterChainDefinitionMap() {
 		Map<String, String> filterChainMap = new LinkedHashMap<>();
 		List<String[]> permsList = new ArrayList<>();
+		List<String[]> anonList = new ArrayList<>();
 		List<Resource> resources = resourceRepository.findAll();
 		if(resources!=null) {
 			for(Resource res : resources) {
 				if(!"#".equals(res.getUrl()) && StringUtils.isNotBlank(res.getUrl())&&StringUtils.isNotBlank(res.getPermCode())) {
-					permsList.add(new String[] {res.getUrl(),"perms["+res.getPermCode()+"]"});
+					if(res.getValid()==1) {
+						permsList.add(new String[] {res.getUrl()+"/**","perms["+res.getPermCode()+":*]"});
+					}else {
+						anonList.add(new String[] {res.getUrl()+"/**","anon"});
+					}
 				}
 			}
 		}
 		for(String[] strings : permsList) {
+			filterChainMap.put(strings[0], strings[1]);
+		}
+		for(String[] strings : anonList) {
 			filterChainMap.put(strings[0], strings[1]);
 		}
 		return filterChainMap;

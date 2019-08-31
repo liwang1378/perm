@@ -36,15 +36,17 @@ public class RoleServiceImpl implements BaseService<Role> {
 
 	@Override
 	public Role save(Role role) {
+		
 		if(role.getId()!=null) {
 			role.setUpdateTime(new Date());
 		}
-		return roleRepository.save(role);
+		return roleRepository.saveAndFlush(role);
 	}
 
 	@Override
 	public Role findOne(Integer id) {
-		return roleRepository.getOne(id);
+//		return roleRepository.getOne(id);
+		return roleRepository.findById(id).get();
 	}
 
 	@Override

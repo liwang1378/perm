@@ -9,6 +9,7 @@ public enum ResultEnum {
 	INVALIDITY(501, "数据验证错误"),
 	CANT_DEL_ROLE(502,"角色已分配不能删除"),
 	CANT_DEL_RESOURCE(503,"资源已分配不能删除"),
+	CANT_DEL_PARENT_RESOURCE(504,"已挂配子节点不能删除"),
 	PENDING(600, "未激活"),
 	UNKNOWNACCOUNT(601, "未知账户"),
 	INCORRECTCREDENTIALS(602, "密码错误"),

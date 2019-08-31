@@ -47,7 +47,12 @@ public class ResourceServiceImpl implements BaseService<Resource> {
 	@Override
 	public void delete(Integer id) {
 		Resource resource = findOne(id);
-		log.info("{}",resource);
+		log.info("资源 - {}",resource);
+		//挂载子节点后不能删除父节点
+		List<Resource> list = resRepository.findByPid(id);
+		if(list!=null && list.size()>0) {
+			throw new UserException(ResultEnum.CANT_DEL_PARENT_RESOURCE);
+		}
 		if(resource!=null && resource.getRoles()!=null && resource.getRoles().size()>0) {
 			throw new UserException(ResultEnum.CANT_DEL_RESOURCE);
 		}

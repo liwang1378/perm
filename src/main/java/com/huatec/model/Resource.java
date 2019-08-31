@@ -40,6 +40,7 @@ public class Resource extends BaseModel {
 	private String icon;
 	private Integer sort;
 	private Integer status;
+	private Integer valid;
 	
 	/** * 放弃维护关系方*/
 	@ManyToMany(mappedBy="resources")

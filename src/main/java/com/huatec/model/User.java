@@ -18,12 +18,16 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="T01_SYS_USER")
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @DynamicInsert
 @DynamicUpdate
@@ -38,9 +42,9 @@ public class User extends BaseModel {
 	@NotBlank(message="用户昵称必填")
 	private String nickname;
 	//未生效
-	@Length(min=6,max=20,message="密码长度需要在{min}和{max}之间")
+	@Length(min=6,max=50,message="密码长度需要在{min}和{max}之间")
 	private String password;
-	@NotBlank(message="盐必填")
+//	@NotBlank(message="盐必填")
 	private String salt;
 	private String pids;
 	private Integer deptId;

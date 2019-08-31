@@ -31,7 +31,7 @@ public class UserDaoTest {
 	@Autowired
 	private ResourceRepository resourceRepository;
 
-	@Before
+//	@Before
 	public void setUp() throws Exception {
 		User user = new User();
 		user.setUsername("zs");
@@ -104,7 +104,8 @@ public class UserDaoTest {
 	@Test
 	@Transactional
 	public void testFindUser() {
-		log.info("{}",userRepository.findByUsername("zs"));
+		User user = userRepository.findByUsername("admin");
+		log.info("{}",user);
 	}
 
 }

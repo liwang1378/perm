@@ -58,7 +58,10 @@ public class RoleController {
 	@RequestMapping("/alterStatus")
 	@SysLog("角色状态变更")
 	public ResponseVo alterStatus(@RequestBody Role role) {
-		return ResponseVoUtil.success(roleService.update(role));
+		log.info("角色状态变更 - {}",role);
+		Role qryRole = roleService.findOne(role.getId());
+		qryRole.setStatus(role.getStatus());
+		return ResponseVoUtil.success(roleService.update(qryRole));
 	}
 
 }

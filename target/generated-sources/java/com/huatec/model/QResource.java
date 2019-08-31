@@ -58,6 +58,8 @@ public class QResource extends EntityPathBase<Resource> {
 
     public final StringPath url = createString("url");
 
+    public final NumberPath<Integer> valid = createNumber("valid", Integer.class);
+
     public QResource(String variable) {
         super(Resource.class, forVariable(variable));
     }

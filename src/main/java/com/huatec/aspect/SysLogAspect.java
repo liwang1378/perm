@@ -14,6 +14,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -77,8 +78,9 @@ public class SysLogAspect {
 					args[i] = sign;
 				}
 			}
+			return JSON.toJSONString(args[0]);
 		}
-		return JSON.toJSONString(args);
+		return "[]";
 	}
 
 	private String getMethodSysLogsAnnotationValue(JoinPoint joinPoint) {

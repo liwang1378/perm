@@ -25,7 +25,7 @@ public class ResourceTreeUtils {
 		for(Resource node : list){
 			Integer pid = treeNode.getId();
 			
-			if(pid.compareTo(node.getPid())==0){
+			if(node.getPid()!=null && pid.compareTo(node.getPid())==0){
 				initChildren(node,list);
 				children.add(node);
 			}
