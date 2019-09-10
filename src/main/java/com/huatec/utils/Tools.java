@@ -2,6 +2,12 @@ package com.huatec.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.huatec.enums.ResultEnum;
+import com.huatec.exception.UserException;
+
 public class Tools {
 
 	/**
@@ -38,4 +44,5 @@ public class Tools {
         String accept = request.getHeader("accept");
         return accept != null && accept.contains("application/json") || (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest"));
     }
+    
 }

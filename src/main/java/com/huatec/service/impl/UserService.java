@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +20,13 @@ import com.huatec.dao.UserRepository;
 import com.huatec.dto.PageVo;
 import com.huatec.dto.QryRo;
 import com.huatec.dto.UserRole;
+import com.huatec.enums.ResultEnum;
+import com.huatec.exception.UserException;
 import com.huatec.model.Role;
 import com.huatec.model.User;
 import com.huatec.utils.Constant;
 import com.huatec.utils.PasswordUtil;
+import com.huatec.vo.SysUserVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,5 +92,15 @@ public class UserService {
 		});
 		vo.setData(userList);
 		return vo;
+	}
+
+	public User getCurrent() {
+		Subject subject = SecurityUtils.getSubject();
+		if(!subject.isAuthenticated()) {
+			throw new UserException(ResultEnum.NOT_SING_IN);
+		}
+		User user = (User) subject.getPrincipal();
+		log.info("{}",user);
+		return user;
 	}
 }

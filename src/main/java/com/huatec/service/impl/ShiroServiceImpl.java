@@ -30,7 +30,7 @@ public class ShiroServiceImpl implements ShiroService {
 		if(resources!=null) {
 			for(Resource res : resources) {
 				if(!"#".equals(res.getUrl()) && StringUtils.isNotBlank(res.getUrl())&&StringUtils.isNotBlank(res.getPermCode())) {
-					if(res.getValid()==1) {
+					if(res.getValid()!=null && res.getValid()==1) {
 						permsList.add(new String[] {res.getUrl()+"/**","perms["+res.getPermCode()+":*]"});
 					}else {
 						anonList.add(new String[] {res.getUrl()+"/**","anon"});
